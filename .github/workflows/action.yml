@@ -23,7 +23,7 @@ jobs:
         openai.api_key = "${{ secrets.OPENAI_API_KEY }}"
         response = openai.Completion.create(
           engine="davinci",
-          prompt="Tell me a story about four vikings in valheim. Their names are Harrison Fjord, Aslaug, Skagi Skítráðr and Vikingman. Please reference something that has happened today, in another year, in your story. Don't include any preamble.",
+          prompt="Tell me a story about four vikings in valheim. Their names are Harrison Fjord, Aslaug, Skagi Skítráðr and Vikingman. Please reference something that has happened today, in another year, in your story. Don't introduce the story, just start telling it.",
           max_tokens=100,
           n=1,
           stop=None,
