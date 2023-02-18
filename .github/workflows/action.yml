@@ -18,6 +18,7 @@ jobs:
     - name: Generate text
       id: generate-text
       run: |
+        #!/usr/bin/env node
         import openai
         import requests
         openai.api_key = "${{ secrets.OPENAI_API_KEY }}"
