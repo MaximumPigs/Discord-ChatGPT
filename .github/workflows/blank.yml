@@ -1,0 +1,51 @@
+name: Generate Text with OpenAI and post to Discord
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-text:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: pip install openai requests
+    - name: Generate text
+      id: generate-text
+      run: |
+        import openai
+        import requests
+        openai.api_key = "${{ secrets.OPENAI_API_KEY }}"
+        response = openai.Completion.create(
+          engine="davinci",
+          prompt="Tell me a story about ",
+          max_tokens=100,
+          n=1,
+          stop=None,
+          temperature=0.5,
+        )
+        text = response.choices[0].text.strip()
+        print(text)
+        print("::set-output name=text::" + text)
+    - name: Post to Discord
+      if: always()
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      run: |
+        message = {
+            "content": f"Generated text: ${{ steps.generate-text.outputs.text }}"
+        }
+        headers = {
+            "Content-Type": "application/json"
+        }
+        response = requests.post(
+            url=os.environ['DISCORD_WEBHOOK_URL'],
+            headers=headers,
+            json=message
+        )
+        print(response.text)
