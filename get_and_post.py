@@ -1,7 +1,6 @@
 from openai import OpenAI
 from discord import SyncWebhook
 import os
-import requests
 
 client = OpenAI(
   api_key = os.environ.get("OPENAI_API_KEY")
