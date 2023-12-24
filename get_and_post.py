@@ -1,6 +1,5 @@
 from openai import OpenAI
-from discord import Webhook
-import requests
+from discord import SyncWebhook
 import os
 
 client = OpenAI(
@@ -12,7 +11,7 @@ prompt = "Tell me a story about four vikings in valheim. Their names are Harriso
 def get_ai_response(prompt):
   try:
       response = client.chat.completions.create(
-          model="gpt-4",
+          model="davinci",
           messages=[{"role": "user", "content": prompt}]
       )
       print(response.choices[0].message)
@@ -22,7 +21,7 @@ def get_ai_response(prompt):
 
 def post_to_discord(message):
   try:
-    hook = Webhook.from_url(os.environ.get('DISCORD_WEBHOOK_URL'))
+    hook = SyncWebhook.from_url(os.environ.get('DISCORD_WEBHOOK_URL'))
     response = hook.send(message)
     print(response)
   except Exception as e:
