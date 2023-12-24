@@ -1,6 +1,7 @@
 from openai import OpenAI
 from discord import SyncWebhook
 import os
+import requests
 
 client = OpenAI(
   api_key = os.environ.get("OPENAI_API_KEY")
@@ -12,7 +13,7 @@ prompt = "Tell me a story in less than 200 words about four vikings in valheim. 
 def get_ai_response(prompt):
   try:
       response = client.chat.completions.create(
-          model="gpt-4",
+          model="gpt-3.5-turbo",
           messages=[{"role": "user", "content": prompt}]
       )
       print(response.choices[0].message.content)
