@@ -3,6 +3,10 @@ name: Generate Text with OpenAI and post to Discord
 on:
   workflow_dispatch:
 
+on:
+  schedule:
+    -cron: 0 22 * * *
+
 jobs:
   generate-text:
     runs-on: ubuntu-latest
