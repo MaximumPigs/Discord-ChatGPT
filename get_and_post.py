@@ -11,7 +11,7 @@ prompt = "Tell me a story about four vikings in valheim. Their names are Harriso
 def get_ai_response(prompt):
   try:
       response = client.completions.create(
-          model="gpt-4",
+          model="curie",
           prompt=prompt,
       )
       return response.choices[0].text.strip()
