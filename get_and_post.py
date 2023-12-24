@@ -7,7 +7,7 @@ client = OpenAI(
 )
 
 #prompt = "Just say Hi"
-prompt = "Tell me a story in less than 1500 characters about four vikings in valheim. Their names are Harrison Fjord, Aslaug, Skagi Skítráðr and Vikingman. make the story about something that has happened today, in another year. Don't introduce the story, just start telling it."
+prompt = "Tell me a story about four vikings in valheim. Their names are Harrison Fjord, Aslaug, Skagi Skítráðr and Vikingman. make the story about something that has happened today, in another year. Don't introduce the story, just start telling it. The story must be less than 1500 characters in length"
 
 def get_ai_response(prompt):
   try:
