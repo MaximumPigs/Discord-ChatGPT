@@ -1,4 +1,5 @@
 from openai import OpenAI
+from discord import Webhook
 import requests
 import os
 
@@ -14,21 +15,16 @@ def get_ai_response(prompt):
           model="gpt-4",
           messages=[{"role": "user", "content": prompt}]
       )
-      return response.choices[0].message.strip()
+      print(response.choices[0].message)
+      return response.choices[0].message
   except Exception as e:
       print(f"Error: {e}")
 
 def post_to_discord(message):
   try:
-    headers = {
-      "Content-Type": "application/json"
-    }
-    response = requests.post(
-      url=os.environ.get('DISCORD_WEBHOOK_URL'),
-      headers=headers,
-        json=message
-      )
-    print(response.text)
+    hook = Webhook.from_url(os.environ.get('DISCORD_WEBHOOK_URL'))
+    response = hook.send(message)
+    print(response)
   except Exception as e:
     print(f"Error: {e}")
 
