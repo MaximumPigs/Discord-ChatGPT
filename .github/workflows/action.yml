@@ -22,7 +22,7 @@ jobs:
 
     - name: run script
       env:
-        OPEN_AI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
         python get_and_post.py
