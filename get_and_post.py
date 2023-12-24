@@ -11,7 +11,7 @@ prompt = "Tell me a story about four vikings in valheim. Their names are Harriso
 def get_ai_response(prompt):
   try:
       response = client.chat.completions.create(
-          model="davinci",
+          model="gpt-4",
           messages=[{"role": "user", "content": prompt}]
       )
       print(response.choices[0].message)
